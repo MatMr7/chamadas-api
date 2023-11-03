@@ -2,6 +2,7 @@
 
 use App\Models\Professor;
 use App\Models\Turma;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +14,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('chamadas');
+
         Schema::create('chamadas', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Professor::class);
+            $table->foreignIdFor(User::class, 'professor_id');
             $table->foreignIdFor(Turma::class);
             $table->dateTime('data_abertura');
             $table->dateTime('data_termino');
