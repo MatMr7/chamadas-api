@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProfessorController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('admin')->group(function () {
+        Route::post('/', [AdminController::class, 'create']);
         Route::post('/professor', [ProfessorController::class, 'create']);
     });
 });
