@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AlunoController;
 use App\Http\Controllers\Admin\ProfessorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Professor\TurmaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [AdminController::class, 'create']);
         Route::post('/professor', [ProfessorController::class, 'create']);
         Route::post('/aluno', [AlunoController::class, 'create']);
+    });
 
+    Route::prefix('professor')->group(function () {
+        Route::post('/turma', [TurmaController::class, 'create']);
     });
 });
 
