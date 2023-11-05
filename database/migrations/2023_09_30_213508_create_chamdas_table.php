@@ -22,10 +22,8 @@ return new class extends Migration
             $table->foreignIdFor(Turma::class);
             $table->dateTime('data_abertura');
             $table->dateTime('data_termino');
-            $table->string('latitude1');
-            $table->string('latitude2');
-            $table->string('longitude1');
-            $table->string('longitude2');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
         });
     }
