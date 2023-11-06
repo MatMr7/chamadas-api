@@ -19,6 +19,9 @@ use App\Http\Controllers\Web\Aluno\Chamada\ChamadaController as AlunoChamadaCont
 
 Auth::routes();
 
+Route::get('/', function () {
+    redirect()->route('home');
+});
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 

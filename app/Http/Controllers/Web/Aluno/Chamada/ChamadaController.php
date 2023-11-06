@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ChamadaController
 {
-    private const MAX_DISTACE = 2;
+    private const MAX_DISTACE = 15;
     public function showMarkPresent($turmaId)
     {
         return view('alunos.turma.index', compact('turmaId'));
