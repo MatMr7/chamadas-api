@@ -24,6 +24,7 @@
             <thead>
             <tr>
                 <th>Turma ID</th>
+                <th>Chamada ID</th>
                 <th>Nome</th>
                 <th>Data de Abertura</th>
                 <th>Data de Término</th>
@@ -35,6 +36,7 @@
             @forelse ($chamadas as $chamada)
                 <tr class="no-link-style">
                     <td><a  style="color: inherit; text-decoration: none;" href="{{ route('chamadas.show', $chamada->id) }}">{{ $chamada->turma_id }}</a></td>
+                    <td><a  style="color: inherit; text-decoration: none;" href="{{ route('chamadas.show', $chamada->id) }}">{{ $chamada->id }}</a></td>
                     <td><a  style="color: inherit; text-decoration: none;" href="{{ route('chamadas.show', $chamada->id) }}">{{ $chamada->turma->nome }}</a></td>
                     <td><a  style="color: inherit; text-decoration: none;" href="{{ route('chamadas.show', $chamada->id) }}">{{ $chamada->data_abertura->format('d/m/Y H:i') }}</a></td>
                     <td><a  style="color: inherit; text-decoration: none;" href="{{ route('chamadas.show', $chamada->id) }}">{{ $chamada->data_termino->format('d/m/Y H:i') }}</a></td>
@@ -44,7 +46,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">No chamadas found.</td>
+                    <td colspan="5">Nenhuma chamada encontrada</td>
                 </tr>
             @endforelse
             </tbody>

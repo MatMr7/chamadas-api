@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Professor;
 
 use App\Http\Controllers\Controller;
 use App\Models\AlunoChamada;
+use App\Models\AlunoTurma;
 use App\Models\Chamada;
 use App\Models\Turma;
 use App\Models\User;
@@ -15,8 +16,7 @@ class ChamadaController extends Controller
     public function create()
     {
          $turmas = Turma::query()->get();
-         $alunos = User::query()->where('user_type_id', UserType::ALUNO)->get();
-         return view('professor.chamada.create', compact('turmas', 'alunos'));
+         return view('professor.chamada.create', compact('turmas'));
     }
 
     public function index()
@@ -28,8 +28,8 @@ class ChamadaController extends Controller
     public function show($chamadaId)
     {
         $chamada = Chamada::query()->findOrFail($chamadaId);
-        $aluno = AlunoChamada::query()->with('aluno')->where('chamada_id', $chamadaId)->first();
-        return view('professor.chamada.show', compact('chamada', 'aluno'));
+        $alunos = AlunoChamada::query()->with('aluno')->where('chamada_id', $chamadaId)->get();
+        return view('professor.chamada.show', compact('chamada', 'alunos'));
 
 
     }
@@ -46,6 +46,16 @@ class ChamadaController extends Controller
         $chamada->longitude = $request->longitude;
         $chamada->save();
 
+        $alunos = AlunoTurma::query()->where('turma_id', $request->turma_id)->get();
+
+        foreach ($alunos as $aluno) {
+            AlunoChamada::query()->create([
+                  'user_id' => $aluno->aluno_id,
+                  'chamada_id' => $chamada->id,
+                  'esta_presente' => false,
+                  'esta_justificado' => false
+          ]);
+        }
         return redirect()->route('home')->with('success', 'Chamada created successfully!');
     }
 }

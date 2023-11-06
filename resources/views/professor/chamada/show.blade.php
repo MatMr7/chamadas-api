@@ -18,11 +18,20 @@
             </thead>
             <tbody>
             <tr>
-                <td>{{ $aluno->id }}</td>
-                <td>{{ $aluno->aluno->name }}</td>
-                <td>{{ $aluno->aluno->cpf }}</td>
-                <td>{{ $chamada->esta_presente ? 'Sim' : 'Não' }}</td>
-                <td>{{ $chamada->esta_justificado ? 'Sim' : 'Não' }}</td>
+            @forelse ($alunos as $aluno)
+                <tr class="no-link-style">
+                    <td>{{ $aluno->id }}</td>
+                    <td>{{ $aluno->aluno->name }}</td>
+                    <td>{{ $aluno->aluno->cpf }}</td>
+                    <td>{{ $aluno->esta_presente ? 'Sim' : 'Não' }}</td>
+                    <td>{{ $aluno->esta_justificado ? 'Sim' : 'Não' }}</td>
+
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5">Nenhum aluno encontrado</td>
+                </tr>
+            @endforelse
             </tr>
             </tbody>
         </table>
