@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Disciplina;
+use App\Models\User;
+use App\Models\UserType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +19,21 @@ class TurmaFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::query()->create([
+            'name' => 'Professor',
+            'cpf' => 'doasjdasio',
+            'password' => 123,
+            'user_type_id' => UserType::PROFESSOR
+        ]);
+
+        $disciplina = Disciplina::query()->create([
+            'codigo' => 1
+        ]);
+
         return [
-            //
+            'nome' => 'Turma 1',
+            'professor_id' => $user->id,
+            'disciplina_id' => $disciplina->id
         ];
     }
 }
