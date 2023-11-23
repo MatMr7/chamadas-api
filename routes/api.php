@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AlunoController;
-use App\Http\Controllers\Admin\ProfessorController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Professor\ChamadasController;
-use App\Http\Controllers\Professor\TurmaController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Admin\AdminController;
+use App\Http\Controllers\Api\Admin\AlunoController;
+use App\Http\Controllers\Api\Admin\ProfessorController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Professor\ChamadasController;
+use App\Http\Controllers\Api\Professor\TurmaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('professor')->group(function () {
         Route::post('/turma', [TurmaController::class, 'create']);
         Route::post('/chamada', [ChamadasController::class, 'create']);
-
+        Route::post('/aluno/turma', [TurmaController::class, 'adicionarAlunoATurma']);
     });
 });
 

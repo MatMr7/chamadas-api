@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,4 +14,40 @@ use Illuminate\Database\Eloquent\Model;
 class Turma extends Model
 {
     use HasFactory;
+
+    public function disciplina()
+    {
+        return $this->belongsTo(Disciplina::class);
+    }
+
+    public function professor()
+    {
+        return $this->belongsTo(User::class, 'professor_id');
+    }
+
+    public function temChamadaAberta(): bool
+    {
+        return Chamada::query()->where('turma_id', $this->id)
+                    ->where('data_abertura','<=', Carbon::now())
+                    ->where('data_termino', '>=', Carbon::now())
+                    ->latest()
+                    ->exists();
+    }
+
+    public function chamadaAberta(): ?Chamada
+    {
+        return Chamada::query()->where('turma_id', $this->id)
+            ->where('data_abertura','<=', Carbon::now())
+            ->where('data_termino', '>=', Carbon::now())
+            ->latest()
+            ->first();
+    }
+
+    public function temPresenca($alunoId): bool
+    {
+        return AlunoChamada::query()->where('turma_id', $this->id)
+            ->where('aluno_id', $alunoId)
+            ->where('esta_presente', true)
+            ->exists();
+    }
 }

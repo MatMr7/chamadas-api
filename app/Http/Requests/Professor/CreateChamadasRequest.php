@@ -18,10 +18,8 @@ class CreateChamadasRequest extends FormRequest
             'turma_id' => ['required', 'integer', 'exists:turmas,id'],
             'data_abertura' => ['required', 'date_format:Y-m-d H:i:s'],
             'data_termino' => ['required', 'date_format:Y-m-d H:i:s'],
-            'latitude1' => ['required', 'string'],
-            'latitude2' => ['required', 'string'],
-            'longitude1' => ['required', 'string'],
-            'longitude2' => ['required', 'string'],
+            'latitude' => ['required', 'string'],
+            'longitude' => ['required', 'string'],
         ];
     }
 }

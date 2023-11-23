@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\User::class, 'aluno_id');
             $table->foreignIdFor(Turma::class);
-            $table->foreignIdFor(\App\Models\Disciplina::class);
             $table->timestamps();
         });
     }
