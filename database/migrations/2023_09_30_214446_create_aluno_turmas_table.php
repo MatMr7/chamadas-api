@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('aluno_turmas', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Aluno::class);
+            $table->foreignIdFor(\App\Models\User::class, 'aluno_id');
             $table->foreignIdFor(Turma::class);
             $table->foreignIdFor(\App\Models\Disciplina::class);
             $table->timestamps();
