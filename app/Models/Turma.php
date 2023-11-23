@@ -39,7 +39,7 @@ class Turma extends Model
         return Chamada::query()->where('turma_id', $this->id)
             ->where('data_abertura','<=', Carbon::now())
             ->where('data_termino', '>=', Carbon::now())
-            ->latest()
+            ->orderByDesc('id')
             ->first();
     }
 
