@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Disciplina;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('turmas', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->foreignIdFor(User::class, 'professor_id');
+            $table->foreignIdFor(Disciplina::class, 'disciplina_id');
             $table->timestamps();
         });
     }
